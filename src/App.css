@@ -48,3 +48,24 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.gameListContainer {
+  min-height: 400px;
+  min-width: 220px;
+  margin-left: 50px;
+  padding: 10px;
+  background-color: #FFDF7F;
+  display: flex;
+  flex-direction: column;
+}
+
+.gameCard {
+  width: 200px;
+  padding: 10px;
+  background-color: #FFC000;
+}

@@ -8,7 +8,27 @@ class BoardContainer extends Component {
         super(props);
 
         this.state = {
-            game: props.game,
+            game: props.selectedGame !== null ?
+                props.games[props.selectedGame] :
+                {
+                    squares: new Array(9).fill(null),
+                    currentPlayer: 'X',
+                    winner: null
+                },
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.selectedGame !== this.props.selectedGame) {
+            this.setState({
+                game: nextProps.selectedGame !== null ?
+                    nextProps.games[nextProps.selectedGame] :
+                    {
+                        squares: new Array(9).fill(null),
+                        currentPlayer: 'X',
+                        winner: null
+                    },
+            });
         }
     }
 
@@ -55,7 +75,11 @@ class BoardContainer extends Component {
                 currentPlayer: winner === null ? nextPlayer : null,
                 winner
             }
-        }));
+        }), () => {
+            if (this.props.selectedGame === null && winner !== null) {
+                this.props.onGameEnd(this.state.game);
+            }
+        });
     };
 
     render() {
