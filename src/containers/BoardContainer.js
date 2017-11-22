@@ -118,7 +118,9 @@ class BoardContainer extends Component {
                     <Board squares={squares} onClick={i => this.handleClick(i)} />
                 </div>
                 <div className="game-info">
-                    <div>{status}</div>
+                    <div><p>{status}</p></div>
+                    {winner !== null &&
+                    <button className="button" onClick={this.props.onNewGame}>New Game</button>}
                 </div>
             </div>
         );

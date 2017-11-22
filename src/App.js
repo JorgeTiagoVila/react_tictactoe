@@ -19,6 +19,10 @@ class App extends Component {
         });
     };
 
+    onNewGame = () => {
+        this.setState({ selectedGame: null });
+    };
+
     render() {
         const {
             selectedGame,
@@ -31,6 +35,7 @@ class App extends Component {
                 games={games}
                 selectedGame={selectedGame}
                 onGameEnd={this.onGameEnd}
+                onNewGame={this.onNewGame}
             />
             <GameListContainer
                 games={games}
