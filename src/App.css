@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  display: flex;
 }
 
 ol, ul {
@@ -21,15 +22,15 @@ ol, ul {
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 56px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 100px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 100px;
 }
 
 .square:focus {
@@ -47,6 +48,9 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
@@ -55,13 +59,17 @@ ol, ul {
 }
 
 .gameListContainer {
-  min-height: 400px;
+  height: 300px;
   min-width: 220px;
   margin-left: 50px;
-  padding-bottom: 10px;
   background-color: #FFDF7F;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+}
+
+.bottomPadding {
+  padding: 5px;
 }
 
 .gameCard {
@@ -82,6 +90,7 @@ ol, ul {
   flex-direction: row;
   margin-bottom: 10px;
   padding: 10px;
+  padding-right: 0;
   background-color: #A1B8E1;
 }
 

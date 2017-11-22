@@ -14,6 +14,7 @@ class GameListContainer extends Component {
                     onRowClick={this.props.onRowClick}
                 />
             )}
+            <div className="bottomPadding" />
         </div>
     }
 }
