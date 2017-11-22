@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import Board from '../components/Board';
 
 class BoardContainer extends Component {
-    state = {
-        game: {
-            squares: new Array(9).fill(null),
-            currentPlayer: 'X',
-            winner: null
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            game: props.game,
         }
-    };
+    }
 
     static calculateWinner(squares) {
         const lines = [

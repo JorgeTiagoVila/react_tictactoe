@@ -3,11 +3,26 @@ import './App.css';
 import BoardContainer from './containers/BoardContainer';
 
 class App extends Component {
+    state = {
+        activeGameIndex: 0,
+        games: [{
+            squares: new Array(9).fill(null),
+            currentPlayer: 'X',
+            winner: null
+        }],
+    };
 
     render() {
+        const {
+            activeGameIndex,
+            games,
+        } = this.state;
+
         return (
         <div>
-            <BoardContainer/>
+            <BoardContainer
+                game={games[activeGameIndex]}
+            />
         </div>
         );
     }
