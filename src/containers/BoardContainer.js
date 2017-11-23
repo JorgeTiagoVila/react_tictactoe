@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import uuid from 'uuid-v4';
+
+import { addGame, setSelectedGame } from '../actions/game';
 
 import Board from '../components/Board';
 
@@ -99,12 +103,20 @@ class BoardContainer extends Component {
             }
         }), () => {
             if (this.props.selectedGame === null && winner !== null) {
-                this.props.onGameEnd({
+                const gameId = uuid();
+
+                this.props.actions.addGame(gameId, {
                     ...this.state.game,
                     gameEnd: new Date(),
                 });
+
+                this.props.actions.setSelectedGame(gameId);
             }
         });
+    };
+
+    onNewGameButtonClick = () => {
+        this.props.actions.setSelectedGame(null);
     };
 
     render() {
@@ -124,7 +136,7 @@ class BoardContainer extends Component {
                 <div className="game-info">
                     <div><p>{status}</p></div>
                     {winner !== null &&
-                    <button className="button" onClick={this.props.onNewGame}>New Game</button>}
+                    <button className="button" onClick={this.onNewGameButtonClick}>New Game</button>}
                 </div>
             </div>
         );
@@ -135,4 +147,11 @@ const mapStateToProps = (state) => ({
     selectedGame: state.selectedGame,
 });
 
-export default connect(mapStateToProps)(BoardContainer);
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({
+        addGame,
+        setSelectedGame,
+    }, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);
