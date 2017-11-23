@@ -9,7 +9,8 @@ class BoardContainer extends Component {
 
         this.state = {
             game: props.selectedGame !== null ?
-                props.games[props.selectedGame] :
+                props.games.find((game) =>
+                    game[0] === props.selectedGame)[1] :
                 {
                     squares: new Array(9).fill(null),
                     currentPlayer: 'X',
@@ -22,9 +23,11 @@ class BoardContainer extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.selectedGame !== this.props.selectedGame) {
+            console.log(nextProps.games);
             this.setState({
                 game: nextProps.selectedGame !== null ?
-                    nextProps.games[nextProps.selectedGame] :
+                    nextProps.games.find((game) =>
+                        game[0] === nextProps.selectedGame)[1] :
                     {
                         squares: new Array(9).fill(null),
                         currentPlayer: 'X',

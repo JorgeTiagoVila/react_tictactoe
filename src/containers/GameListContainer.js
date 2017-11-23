@@ -11,6 +11,7 @@ class GameListContainer extends Component {
                     key={uuid()}
                     game={game}
                     name={`Game ${index}`}
+                    onRowClick={this.props.onRowClick}
                 />
             )}
         </div>

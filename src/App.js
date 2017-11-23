@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid-v4';
 import './App.css';
 
 import BoardContainer from './containers/BoardContainer';
@@ -12,15 +13,20 @@ class App extends Component {
 
     onGameEnd = (game) => {
         this.setState((state) => {
+            const gameId = uuid();
             // Create a copy of the array, add new game on its beginning
             const games = this.state.games.slice();
-            games.unshift(game);
-            return Object.assign({}, state, { games, selectedGame: 0 });
+            games.unshift([gameId, game]);
+            return Object.assign({}, state, { games, selectedGame: gameId });
         });
     };
 
     onNewGame = () => {
         this.setState({ selectedGame: null });
+    };
+
+    onRowClick = (gameId) => {
+        this.setState({ selectedGame: gameId });
     };
 
     render() {
@@ -39,6 +45,7 @@ class App extends Component {
             />
             <GameListContainer
                 games={games}
+                onRowClick={this.onRowClick}
             />
         </div>
         );
