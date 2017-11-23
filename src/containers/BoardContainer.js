@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Board from '../components/Board';
 
@@ -129,5 +130,9 @@ class BoardContainer extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ({
+    games: state.games,
+    selectedGame: state.selectedGame,
+});
 
-export default BoardContainer;
+export default connect(mapStateToProps)(BoardContainer);

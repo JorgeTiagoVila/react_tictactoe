@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import uuid from 'uuid-v4';
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import gameReducer from './reducers/game';
+
 import './App.css';
 
 import ScoreTableContainer from './containers/ScoreTableContainer';
@@ -11,6 +17,8 @@ class App extends Component {
         selectedGame: null,
         games: [],
     };
+
+    store = createStore(gameReducer);
 
     onGameEnd = (game) => {
         this.setState((state) => {
@@ -37,21 +45,23 @@ class App extends Component {
         } = this.state;
 
         return (
-            <div>
-                <ScoreTableContainer games={games} />
-                <div className="container">
-                    <BoardContainer
-                        games={games}
-                        selectedGame={selectedGame}
-                        onGameEnd={this.onGameEnd}
-                        onNewGame={this.onNewGame}
-                    />
-                    <GameListContainer
-                        games={games}
-                        onRowClick={this.onRowClick}
-                    />
+            <Provider store={this.store}>
+                <div>
+                    <ScoreTableContainer games={games} />
+                    <div className="container">
+                        <BoardContainer
+                            games={games}
+                            selectedGame={selectedGame}
+                            onGameEnd={this.onGameEnd}
+                            onNewGame={this.onNewGame}
+                        />
+                        <GameListContainer
+                            games={games}
+                            onRowClick={this.onRowClick}
+                        />
+                    </div>
                 </div>
-            </div>
+            </Provider>
         );
     }
 }

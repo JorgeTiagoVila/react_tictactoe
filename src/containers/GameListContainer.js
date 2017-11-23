@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import uuid from 'uuid-v4';
 
 import GameRow from '../components/GameRow';
@@ -19,4 +20,8 @@ class GameListContainer extends Component {
     }
 }
 
-export default GameListContainer;
+const mapStateToProps = (state) => ({
+    games: state.games,
+});
+
+export default connect(mapStateToProps)(GameListContainer);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import ScoreCard from '../components/ScoreCard';
 
@@ -30,4 +31,8 @@ class ScoreTableContainer extends Component {
     }
 }
 
-export default ScoreTableContainer;
+const mapStateToProps = (state) => ({
+    games: state.games,
+});
+
+export default connect(mapStateToProps)(ScoreTableContainer);
