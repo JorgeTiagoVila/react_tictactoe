@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { getScores } from '../selectors/game';
+
 import ScoreCard from '../components/ScoreCard';
 
 class ScoreTableContainer extends Component {
     render() {
-        const { games } = this.props;
+        const { scores } = this.props;
 
         return (
             <div className="scoreTableContainer">
                 <ScoreCard
                     title="Games Played"
-                    value={games.length}
+                    value={scores.gamesPlayed}
                 />
                 <ScoreCard
                     title="Games X Won"
-                    value={games.filter((game) => game[1].winner === 'X').length}
+                    value={scores.gamesXWon}
                 />
                 <ScoreCard
                     title="Games O Won"
-                    value={games.filter((game) => game[1].winner === 'O').length}
+                    value={scores.gamesOWon}
                 />
 
                 <ScoreCard
                     title="Games Tied"
-                    value={games.filter((game) => game[1].winner === 'None').length}
+                    value={scores.gamesTied}
                 />
             </div>
         );
@@ -32,7 +34,7 @@ class ScoreTableContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    games: state.games,
+    scores: getScores(state),
 });
 
 export default connect(mapStateToProps)(ScoreTableContainer);
