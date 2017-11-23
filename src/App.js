@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid-v4';
 import './App.css';
 
+import ScoreTableContainer from './containers/ScoreTableContainer';
 import BoardContainer from './containers/BoardContainer';
 import GameListContainer from './containers/GameListContainer';
 
@@ -36,18 +37,21 @@ class App extends Component {
         } = this.state;
 
         return (
-        <div className="container">
-            <BoardContainer
-                games={games}
-                selectedGame={selectedGame}
-                onGameEnd={this.onGameEnd}
-                onNewGame={this.onNewGame}
-            />
-            <GameListContainer
-                games={games}
-                onRowClick={this.onRowClick}
-            />
-        </div>
+            <div>
+                <ScoreTableContainer games={games} />
+                <div className="container">
+                    <BoardContainer
+                        games={games}
+                        selectedGame={selectedGame}
+                        onGameEnd={this.onGameEnd}
+                        onNewGame={this.onNewGame}
+                    />
+                    <GameListContainer
+                        games={games}
+                        onRowClick={this.onRowClick}
+                    />
+                </div>
+            </div>
         );
     }
 }
