@@ -13,7 +13,9 @@ class BoardContainer extends Component {
                 {
                     squares: new Array(9).fill(null),
                     currentPlayer: 'X',
-                    winner: null
+                    winner: null,
+                    gameStart: new Date(),
+                    gameEnd: null,
                 },
         };
     }
@@ -26,7 +28,9 @@ class BoardContainer extends Component {
                     {
                         squares: new Array(9).fill(null),
                         currentPlayer: 'X',
-                        winner: null
+                        winner: null,
+                        gameStart: new Date(),
+                        gameEnd: null,
                     },
             });
         }
@@ -71,13 +75,17 @@ class BoardContainer extends Component {
 
         this.setState((state) => Object.assign({}, state, {
             game: {
+                ...this.state.game,
                 squares,
                 currentPlayer: winner === null ? nextPlayer : null,
-                winner
+                winner,
             }
         }), () => {
             if (this.props.selectedGame === null && winner !== null) {
-                this.props.onGameEnd(this.state.game);
+                this.props.onGameEnd({
+                    ...this.state.game,
+                    gameEnd: new Date(),
+                });
             }
         });
     };
