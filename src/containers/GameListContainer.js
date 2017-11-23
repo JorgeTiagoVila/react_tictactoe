@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { bindActionsCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import uuid from 'uuid-v4';
 
