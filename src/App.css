@@ -61,9 +61,9 @@ ol, ul {
 
 .gameListContainer {
   height: 400px;
+  padding: 0 !important;
   min-width: 220px;
   margin-left: 50px;
-  background-color: #FFDF7F;
   display: flex;
   flex-direction: column;
 }
@@ -71,7 +71,7 @@ ol, ul {
 .gameListHeader {
   align-self: stretch;
   padding: 10px;
-  background-color: #DFBF5F;
+  border-bottom: 3px solid white;
 }
 
 .gameListCards {
@@ -91,7 +91,6 @@ ol, ul {
   align-self: stretch;
   padding: 10px;
   margin-top: 10px;
-  background-color: #FFC000;
 }
 
 .gameCard:first-child {

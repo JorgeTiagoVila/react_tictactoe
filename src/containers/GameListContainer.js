@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { List } from 'semantic-ui-react';
+import { List, Segment } from 'semantic-ui-react';
 
 import {
     setSelectedGame,
@@ -21,7 +21,7 @@ class GameListContainer extends Component {
     };
 
     render() {
-        return <div className="gameListContainer">
+        return <Segment className="gameListContainer" raised inverted color="yellow">
             <GameListHeader
                 filters={this.props.filters}
                 sortField={this.props.sortField}
@@ -38,7 +38,7 @@ class GameListContainer extends Component {
                     />
                 )}
             </List>
-        </div>
+        </Segment>
     }
 }
 
