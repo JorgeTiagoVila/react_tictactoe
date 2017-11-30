@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import gameReducer from './reducers/game';
 
+import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 import ScoreTableContainer from './containers/ScoreTableContainer';
