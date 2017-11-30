@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import uuid from 'uuid-v4';
 
 import {
     setSelectedGame,
     toggleFilter,
     setSortField
 } from '../actions/game';
+
+import { sortedGamesSelector } from '../selectors/game'
 
 import GameListHeader from '../components/GameListHeader';
 import GameRow from '../components/GameRow';
@@ -29,7 +30,7 @@ class GameListContainer extends Component {
             <div className="gameListCards">
             {this.props.games.map((game, index) =>
                 <GameRow
-                    key={uuid()}
+                    key={game[0]}
                     game={game}
                     name={`Game ${index}`}
                     onRowClick={this.onRowClick}
@@ -41,7 +42,7 @@ class GameListContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    games: state.games,
+    games: sortedGamesSelector(state),
     filters: state.filters,
     sortField: state.sortField
 });
