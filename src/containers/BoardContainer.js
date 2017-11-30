@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Button, Header } from 'semantic-ui-react';
 import uuid from 'uuid-v4';
 
 import { addGame, setSelectedGame } from '../actions/game';
@@ -133,9 +134,16 @@ class BoardContainer extends Component {
                     <Board squares={squares} onClick={i => this.handleClick(i)} />
                 </div>
                 <div className="game-info">
-                    <div><p>{status}</p></div>
+                    <Header size='tiny'>{status}</Header>
                     {winner !== null &&
-                    <button className="button" onClick={this.onNewGameButtonClick}>New Game</button>}
+                    <Button
+                        style={{ marginTop: '1em' }}
+                        content='New Game'
+                        icon='smile'
+                        labelPosition='left'
+                        onClick={this.onNewGameButtonClick}
+                    />
+                    }
                 </div>
             </div>
         );

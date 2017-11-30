@@ -48,6 +48,7 @@ ol, ul {
 
 .game-info {
   margin-left: 20px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,6 +64,7 @@ ol, ul {
   height: 400px;
   padding: 0 !important;
   min-width: 220px;
+  margin-top: 0 !important;
   margin-left: 50px;
   display: flex;
   flex-direction: column;
