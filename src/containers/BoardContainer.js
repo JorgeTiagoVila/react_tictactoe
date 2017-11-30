@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Header } from 'semantic-ui-react';
 import uuid from 'uuid-v4';
 
-import { addGame, setSelectedGame } from '../actions/game';
+import { addGameAsync as addGame, setSelectedGame } from '../actions/game';
 
 import Board from '../components/Board';
 
@@ -30,7 +30,6 @@ class BoardContainer extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.selectedGame !== this.props.selectedGame) {
-            console.log(nextProps.selectedGame);
             this.setState({
                 game: nextProps.selectedGame !== null ?
                     nextProps.games.get(nextProps.selectedGame) :
@@ -80,7 +79,7 @@ class BoardContainer extends Component {
         return null;
     }
 
-    handleClick = (i) => {
+    handleClick = async (i) => {
         // Ignore click if the square is already filled or there is already a winner
         if (this.state.game.squares[i] !== null || this.state.game.winner !== null) {
             return;
@@ -96,16 +95,17 @@ class BoardContainer extends Component {
         // Check if there is a winner
         const winner = BoardContainer.calculateWinner(squares);
 
-        this.setState((state) => Object.assign({}, state, {
+        await this.setState((state) => Object.assign({}, state, {
             game: {
                 ...this.state.game,
                 squares,
                 currentPlayer: winner === null ? nextPlayer : null,
                 winner,
             }
-        }), () => {
+        }), async () => {
             if (this.props.selectedGame === null && winner !== null) {
-                this.props.actions.addGame({
+
+                await this.props.actions.addGame({
                     ...this.state.game,
                     gameEnd: new Date(),
                 });
@@ -126,6 +126,8 @@ class BoardContainer extends Component {
             winner
         } = this.state.game;
 
+        const { loading } = this.props;
+
         const status = winner === null ? `Next player: ${currentPlayer}` : `Winner: ${winner}`;
 
         return (
@@ -141,6 +143,7 @@ class BoardContainer extends Component {
                         content='New Game'
                         icon='smile'
                         labelPosition='left'
+                        loading={loading}
                         onClick={this.onNewGameButtonClick}
                     />
                     }
@@ -151,6 +154,7 @@ class BoardContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading: state.loading,
     games: state.games,
     selectedGame: state.selectedGame,
 });

@@ -10,11 +10,15 @@ const State = Record({
     games: new Map(),
     selectedGame: null,
     filters: Set.of('X', 'O', 'None'),
-    sortField: '-gameStart'
+    sortField: '-gameStart',
+    loading: false,
 });
 
 const game = (state = new State(), action) => {
     switch (action.type) {
+        case actionTypes.SET_LOADING:
+            return state.set('loading', action.payload);
+
         case actionTypes.SET_SELECTED_GAME:
             return state.set('selectedGame', action.payload);
 

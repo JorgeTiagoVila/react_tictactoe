@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import gameReducer from './reducers/game';
@@ -14,7 +15,9 @@ import GameListContainer from './containers/GameListContainer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 class App extends Component {
-    store = createStore(gameReducer, composeWithDevTools());
+    store = createStore(
+        gameReducer,
+        composeWithDevTools(applyMiddleware(thunk)));
 
     render() {
         return (
