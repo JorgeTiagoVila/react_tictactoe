@@ -31,24 +31,30 @@ const GameListHeader = (props) =>
             </Label>
         </div>
         <Header size='tiny'>Sort By</Header>
-        <Dropdown fluid selection options={[{
-            text: 'Start date',
-            value: '-gameStart',
-            icon: 'triangle down'
-        }, {
-            text: 'Start date',
-            value: 'gameStart',
-            icon: 'triangle up'
-        }, {
-            text: 'Duration',
-            value: '-duration',
-            icon: 'triangle down'
-        }, {
-            text: 'Duration',
-            value: 'duration',
-            icon: 'triangle up'
-        }
-        ]} />
+        <Dropdown
+            fluid
+            selection
+            options={[{
+                text: 'Start date',
+                value: '-gameStart',
+                icon: 'triangle down'
+            }, {
+                text: 'Start date',
+                value: 'gameStart',
+                icon: 'triangle up'
+            }, {
+                text: 'Duration',
+                value: '-duration',
+                icon: 'triangle down'
+            }, {
+                text: 'Duration',
+                value: 'duration',
+                icon: 'triangle up'
+            }
+            ]}
+            value={props.sortField}
+            onChange={(event, data) => props.onChangeSortField(data.value)}
+        />
     </div>;
 
 export default GameListHeader;
