@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import uuid from 'uuid-v4';
 
-import { setSelectedGame } from '../actions/game';
+import {
+    setSelectedGame,
+    toggleFilter,
+    setSortField
+} from '../actions/game';
 
+import GameListHeader from '../components/GameListHeader';
 import GameRow from '../components/GameRow';
 
 class GameListContainer extends Component {
@@ -15,6 +20,12 @@ class GameListContainer extends Component {
 
     render() {
         return <div className="gameListContainer">
+            <GameListHeader
+                filters={this.props.filters}
+                sortField={this.props.sortField}
+                onToggleFilter={this.props.actions.toggleFilter}
+                onChangeSortField={this.props.actions.setSortField}
+            />
             {this.props.games.map((game, index) =>
                 <GameRow
                     key={uuid()}
@@ -30,11 +41,15 @@ class GameListContainer extends Component {
 
 const mapStateToProps = (state) => ({
     games: state.games,
+    filters: state.filters,
+    sortField: state.sortField
 });
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({
         setSelectedGame,
+        toggleFilter,
+        setSortField,
     }, dispatch)
 });
 
