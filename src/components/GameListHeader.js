@@ -7,7 +7,7 @@ const GameListHeader = (props) =>
         <div>
             <Label
                 as="a"
-                color="blue"
+                color={props.filters.includes('X') ? 'blue' : 'gray'}
                 active={props.filters.includes('X')}
                 onClick={() => props.onToggleFilter('X')}
             >
@@ -15,7 +15,7 @@ const GameListHeader = (props) =>
             </Label>
             <Label
                 as="a"
-                color="red"
+                color={props.filters.includes('O') ? 'red' : 'gray'}
                 active={props.filters.includes('O')}
                 onClick={() => props.onToggleFilter('O')}
             >
@@ -23,7 +23,7 @@ const GameListHeader = (props) =>
             </Label>
             <Label
                 as="a"
-                color="yellow"
+                color={props.filters.includes('None') ? 'yellow' : 'gray'}
                 active={props.filters.includes('None')}
                 onClick={() => props.onToggleFilter('None')}
             >
