@@ -1,4 +1,12 @@
-import { createSelector } from 'reselect';
+import {
+    createSelector,
+    createSelectorCreator,
+    defaultMemoize
+} from 'reselect';
+import { is } from 'immutable';
+
+// Create a "selector creator" that uses immutable.is instead of ===
+const createImmutableSelector = createSelectorCreator(defaultMemoize, is);
 
 const gamesSelector = (state) =>
     state.games;
@@ -9,12 +17,12 @@ const filtersSelector = (state) =>
 const sortFieldSelector = (state) =>
     state.sortField;
 
-export const filteredGamesSelector = createSelector(
+export const filteredGamesSelector = createImmutableSelector(
     gamesSelector,
     filtersSelector,
     (games, filters) => games.filter((game) => filters.includes(game.winner)));
 
-export const sortedGamesSelector = createSelector(
+export const sortedGamesSelector = createImmutableSelector(
     filteredGamesSelector,
     sortFieldSelector,
     (games, sortField) => {
