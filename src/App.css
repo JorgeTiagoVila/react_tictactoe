@@ -65,7 +65,14 @@ ol, ul {
   background-color: #FFDF7F;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflowY: scroll;
+}
+
+.gameListHeader {
+  align-self: stretch;
+  padding: 10px;
+  height: 80px;
+  background-color: #DFBF5F;
 }
 
 .bottomPadding {
