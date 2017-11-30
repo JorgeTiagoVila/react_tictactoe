@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { List } from 'semantic-ui-react';
 
 import {
     setSelectedGame,
@@ -27,16 +28,16 @@ class GameListContainer extends Component {
                 onToggleFilter={this.props.actions.toggleFilter}
                 onChangeSortField={this.props.actions.setSortField}
             />
-            <div className="gameListCards">
-            {this.props.games.map((game, index) =>
-                <GameRow
-                    key={game.id}
-                    game={game}
-                    name={`Game ${index}`}
-                    onRowClick={this.onRowClick}
-                />
-            )}
-            </div>
+            <List celled relaxed='very' className="gameListCards">
+                {this.props.games.map((game, index) =>
+                    <GameRow
+                        key={game.id}
+                        game={game}
+                        name={`Game ${index}`}
+                        onRowClick={this.onRowClick}
+                    />
+                )}
+            </List>
         </div>
     }
 }
