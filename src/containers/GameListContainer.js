@@ -26,6 +26,7 @@ class GameListContainer extends Component {
                 onToggleFilter={this.props.actions.toggleFilter}
                 onChangeSortField={this.props.actions.setSortField}
             />
+            <div className="gameListCards">
             {this.props.games.map((game, index) =>
                 <GameRow
                     key={uuid()}
@@ -34,7 +35,7 @@ class GameListContainer extends Component {
                     onRowClick={this.onRowClick}
                 />
             )}
-            <div className="bottomPadding" />
+            </div>
         </div>
     }
 }

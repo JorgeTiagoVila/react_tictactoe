@@ -59,13 +59,12 @@ ol, ul {
 }
 
 .gameListContainer {
-  height: 300px;
+  height: 400px;
   min-width: 220px;
   margin-left: 50px;
   background-color: #FFDF7F;
   display: flex;
   flex-direction: column;
-  overflowY: scroll;
 }
 
 .gameListHeader {
@@ -75,16 +74,28 @@ ol, ul {
   background-color: #DFBF5F;
 }
 
+.gameListCards {
+  flex: 1;
+  align-self: stretch;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
 .bottomPadding {
   padding: 5px;
 }
 
 .gameCard {
-  width: 200px;
+  align-self: stretch;
   padding: 10px;
-  margin: 10px;
-  margin-bottom: 0;
+  margin-top: 10px;
   background-color: #FFC000;
+}
+
+.gameCard:first-child {
+  margin-top: 0;
 }
 
 .button {
