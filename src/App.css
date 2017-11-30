@@ -56,6 +56,7 @@ ol, ul {
 .container {
   display: flex;
   flex-direction: row;
+  margin-top: 4em;
 }
 
 .gameListContainer {
