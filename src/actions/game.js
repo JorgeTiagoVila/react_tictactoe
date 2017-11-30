@@ -20,10 +20,7 @@ export const toggleFilter = (filter) => ({
     payload: filter,
 });
 
-export const addGame = (gameId, game) => ({
+export const addGame = (game) => ({
     type: actionTypes.ADD_GAME,
-    payload: {
-        gameId,
-        game,
-    },
+    payload: game,
 });

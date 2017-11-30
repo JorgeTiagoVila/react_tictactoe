@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import uuid from 'uuid-v4';
 
-import { addGame, setSelectedGame } from '../actions/game';
+import { addGame, setSelectedGame } from '../actions/game';
 
 import Board from '../components/Board';
 
@@ -17,6 +17,7 @@ class BoardContainer extends Component {
                 props.games.find((game) =>
                     game[0] === props.selectedGame)[1] :
                 {
+                    id: uuid(),
                     squares: new Array(9).fill(null),
                     currentPlayer: 'X',
                     winner: null,
@@ -28,12 +29,12 @@ class BoardContainer extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.selectedGame !== this.props.selectedGame) {
-            console.log(nextProps.games);
+            console.log(nextProps.selectedGame);
             this.setState({
                 game: nextProps.selectedGame !== null ?
-                    nextProps.games.find((game) =>
-                        game[0] === nextProps.selectedGame)[1] :
+                    nextProps.games.get(nextProps.selectedGame) :
                     {
+                        id: uuid(),
                         squares: new Array(9).fill(null),
                         currentPlayer: 'X',
                         winner: null,
@@ -103,14 +104,12 @@ class BoardContainer extends Component {
             }
         }), () => {
             if (this.props.selectedGame === null && winner !== null) {
-                const gameId = uuid();
-
-                this.props.actions.addGame(gameId, {
+                this.props.actions.addGame({
                     ...this.state.game,
                     gameEnd: new Date(),
                 });
 
-                this.props.actions.setSelectedGame(gameId);
+                this.props.actions.setSelectedGame(this.state.game.id);
             }
         });
     };
@@ -142,6 +141,7 @@ class BoardContainer extends Component {
         );
     }
 }
+
 const mapStateToProps = (state) => ({
     games: state.games,
     selectedGame: state.selectedGame,

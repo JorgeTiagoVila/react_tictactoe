@@ -1,35 +1,37 @@
+import {
+    Map,
+    Record,
+    Set
+} from 'immutable';
+
 import { actionTypes } from '../actions/game';
 
-const initialState = {
-    games: [],
+const State = Record({
+    games: new Map(),
     selectedGame: null,
-    filters: ['X', 'O', 'None'],
+    filters: Set.of('X', 'O', 'None'),
     sortField: '-gameStart'
-};
+});
 
-const game = (state = initialState, action) => {
+const game = (state = new State(), action) => {
     switch (action.type) {
         case actionTypes.SET_SELECTED_GAME:
-            return Object.assign({}, state, { selectedGame: action.payload });
+            return state.set('selectedGame', action.payload);
 
         case actionTypes.ADD_GAME:
-            const games = state.games.slice();
-            games.unshift([action.payload.gameId, action.payload.game]);
-            return Object.assign({}, state, { games });
+            return state.setIn(['games', action.payload.id], action.payload);
 
         case actionTypes.TOGGLE_FILTER:
-            const filters = state.filters.slice();
-            const filterIndex = filters.indexOf(action.payload);
-            if (filterIndex === -1) {
-                filters.push(action.payload);
-            } else {
-                filters.splice(filterIndex, 1);
-            }
+            return state.update('filters', (filters) => {
+                if (filters.includes(action.payload)) {
+                    return filters.delete(action.payload);
+                }
 
-            return Object.assign({}, state, { filters });
+                return filters.add(action.payload);
+            });
 
         case actionTypes.SET_SORT_FIELD:
-            return Object.assign({}, state, { sortField: action.payload });
+            return state.set('sortField', action.payload);
 
         default:
             return state;

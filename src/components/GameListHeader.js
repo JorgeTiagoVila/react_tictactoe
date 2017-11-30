@@ -6,17 +6,17 @@ const GameListHeader = (props) =>
         <div>
             <input
                 checked={props.filters.includes('X')}
-                onClick={() => props.onToggleFilter('X')}
+                onChange={() => props.onToggleFilter('X')}
                 type="checkbox"
             />X
             <input
                 checked={props.filters.includes('O')}
-                onClick={() => props.onToggleFilter('O')}
+                onChange={() => props.onToggleFilter('O')}
                 type="checkbox"
             />O
             <input
                 checked={props.filters.includes('None')}
-                onClick={() => props.onToggleFilter('None')}
+                onChange={() => props.onToggleFilter('None')}
                 type="checkbox"
             />None
         </div>

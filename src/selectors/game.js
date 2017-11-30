@@ -12,7 +12,7 @@ const sortFieldSelector = (state) =>
 export const filteredGamesSelector = createSelector(
     gamesSelector,
     filtersSelector,
-    (games, filters) => games.filter((game) => filters.includes(game[1].winner)));
+    (games, filters) => games.filter((game) => filters.includes(game.winner)));
 
 export const sortedGamesSelector = createSelector(
     filteredGamesSelector,
@@ -22,32 +22,34 @@ export const sortedGamesSelector = createSelector(
         switch (sortField) {
             default:
             case '-gameStart':
-                compareFunction = (gameA, gameB) => gameB[1].gameStart - gameA[1].gameStart;
+                compareFunction = (gameA, gameB) => gameB.gameStart - gameA.gameStart;
                 break;
 
             case 'gameStart':
-                compareFunction = (gameA, gameB) => gameA[1].gameStart - gameB[1].gameStart;
+                compareFunction = (gameA, gameB) => gameA.gameStart - gameB.gameStart;
                 break;
 
             case '-duration':
-                compareFunction = (gameA, gameB) => (gameB[1].gameEnd - gameB[1].gameStart) - (gameA[1].gameEnd - gameA[1].gameStart);
+                compareFunction = (gameA, gameB) => (gameB.gameEnd - gameB.gameStart) - (gameA.gameEnd - gameA.gameStart);
                 break;
 
             case 'duration':
-                compareFunction = (gameA, gameB) => (gameA[1].gameEnd - gameA[1].gameStart) - (gameB[1].gameEnd - gameB[1].gameStart);
+                compareFunction = (gameA, gameB) => (gameA.gameEnd - gameA.gameStart) - (gameB.gameEnd - gameB.gameStart);
                 break;
         }
 
-        return games.sort(compareFunction);
+        return games
+            .sort(compareFunction)
+            .toList();
     });
 
 export const getScores = createSelector(
     filteredGamesSelector,
     (games) => {
         return {
-            gamesPlayed: games.length,
-            gamesXWon: games.filter((game) => game[1].winner === 'X').length,
-            gamesOWon: games.filter((game) => game[1].winner === 'O').length,
-            gamesTied: games.filter((game) => game[1].winner === 'None').length
+            gamesPlayed: games.count(),
+            gamesXWon: games.count((game) => game.winner === 'X'),
+            gamesOWon: games.count((game) => game.winner === 'O'),
+            gamesTied: games.count((game) => game.winner === 'None')
         }
     });

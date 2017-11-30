@@ -30,7 +30,7 @@ class GameListContainer extends Component {
             <div className="gameListCards">
             {this.props.games.map((game, index) =>
                 <GameRow
-                    key={game[0]}
+                    key={game.id}
                     game={game}
                     name={`Game ${index}`}
                     onRowClick={this.onRowClick}
