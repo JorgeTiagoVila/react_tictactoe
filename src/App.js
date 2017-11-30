@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uuid from 'uuid-v4';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -11,9 +10,10 @@ import './App.css';
 import ScoreTableContainer from './containers/ScoreTableContainer';
 import BoardContainer from './containers/BoardContainer';
 import GameListContainer from './containers/GameListContainer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 class App extends Component {
-    store = createStore(gameReducer);
+    store = createStore(gameReducer, composeWithDevTools());
 
     render() {
         return (

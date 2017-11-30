@@ -8,6 +8,7 @@
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
     "reselect": "^3.0.1",
     "uuid-v4": "^0.1.0"
   },
